@@ -25,8 +25,8 @@ def clean_up(combined_record_group):
     for record in combined_record_group:
         group_list = list(record)
         group_list.pop(1)
-        strg = ", ".join(group_list)
-        result = result + "({}\n)".format(strg)
+        group_tuple = tuple(group_list)
+        result = result + f"{group_tuple}\n"
 
     return result
 
