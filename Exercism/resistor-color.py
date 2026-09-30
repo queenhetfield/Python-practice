@@ -23,3 +23,21 @@ def label(colors):
     if numeric % (10 ** 3) == 0:
         return f"{numeric // (10 ** 3)} kiloohms"
     return f"{numeric} ohms"
+def resistor_label(colors):
+    """Function returning tolerance."""
+    tolerance = {"grey": "±0.05%", "violet": "±0.1%", "blue": "±0.25%", "green": "±0.5%",
+                 "brown": "±1%", "red": "±2%", "gold": "±5%", "silver": "±10%"}
+    if len(colors) == 5:
+        numeric = (value(colors) * 10 + color_numbers[colors[2]]) * 10 ** color_numbers[colors[3]]
+        if numeric / (10 ** 9) > 1:
+            numeric = f"{numeric / (10 ** 9)} gigaohms"
+        elif numeric / (10 ** 6) > 1:
+            numeric = f"{numeric / (10 ** 6)} megaohms"
+        elif numeric / (10 ** 3) > 1:
+            numeric = f"{numeric / (10 ** 3)} kiloohms"
+        return f"{numeric} {tolerance[colors[4]]}"
+    if len(colors) == 4:
+        return f"{label(colors)} {tolerance[colors[3]]}"
+    return label(colors)
+
+print(resistor_label(["violet", "orange", "red", "grey"]))
