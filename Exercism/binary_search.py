@@ -1,15 +1,16 @@
 """Module providing a function implementing a binary search algorithm."""
 def find(search_list, value):
-    """Function implementing a binary search algorithm."""
-    chopping_list = search_list
-    while len(chopping_list) > 1:
-        middle = len(chopping_list) // 2
-        if chopping_list[middle] == value:
-            return search_list.index(value)
-        if chopping_list[middle] > value:
-            chopping_list = chopping_list[:middle]
+    """Function implementing a binary search of a string."""
+    low = 0
+    high = len(search_list)
+    while len(search_list[low:high]) > 1:
+        middle = (low + high) // 2
+        if search_list[middle] == value:
+            return middle
+        if search_list[middle] > value:
+            high = middle
         else:
-            chopping_list = chopping_list[middle:]
-    if search_list and search_list[0] == value:
-        return search_list.index(value)
+            low = middle + 1
+    if low < len(search_list) and search_list[low] == value:
+        return low
     raise ValueError("value not in array")
